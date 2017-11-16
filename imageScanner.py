@@ -25,6 +25,7 @@ def increaseContrast(image):
 
 
 def refineEdge(image):
+	"""Blur to remove noise and canny for edge"""
 	gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 	gray = cv2.GaussianBlur(gray, (5, 5), 0)
 	edged = cv2.Canny(gray, 75, 200)
@@ -32,6 +33,7 @@ def refineEdge(image):
 
 
 def getContour(image):
+	"""Find the biggest close shape in rectangle"""
 	(_, cnts, _) = cv2.findContours(image.copy(), cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 	cnts = sorted(cnts, key = cv2.contourArea, reverse = True)[:5]
 	 
@@ -45,6 +47,7 @@ def getContour(image):
 
 
 def transformImage(image, contour,  mode, ratio):
+	"""transform image to desired result"""
 	warped = four_point_transform(image, contour.reshape(4, 2) * ratio)
 
 	if mode == 0 :
@@ -62,7 +65,7 @@ def transformImage(image, contour,  mode, ratio):
 
 
 def scanImage(path, mode):
-	"""Read Image from path and display transformed Image"""
+	"""Read Image from path and return transformed Image"""
 
 	#Read Image
 	image = cv2.imread(path)
