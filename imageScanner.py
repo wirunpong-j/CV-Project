@@ -70,31 +70,34 @@ def scanImage(path, mode):
 	orig = image.copy()
 	image = imutils.resize(image, height = 500)
 
-	cv2.imshow("Original", image)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow("Original", image)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
 
 	image = increaseContrast(image)
 
-	cv2.imshow("Contrast", image)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow("Contrast", image)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
 
 	edged = refineEdge(image)
 
-	cv2.imshow("Edge", edged)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow("Edge", edged)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
 
-	screenCnt = getContour(edged)
-	cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
+	# screenCnt = getContour(edged)
+	# cv2.drawContours(image, [screenCnt], -1, (0, 255, 0), 2)
 
-	cv2.imshow("Contour", image)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow("Contour", image)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
 
 	result = transformImage(orig, screenCnt, mode, ratio)
 
-	cv2.imshow("Result", result)
-	cv2.waitKey(0)
-	cv2.destroyAllWindows()
+	# cv2.imshow("Result", result)
+	# cv2.waitKey(0)
+	# cv2.destroyAllWindows()
+
+	return result
+
