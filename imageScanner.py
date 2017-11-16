@@ -65,7 +65,10 @@ def transformImage(image, contour,  mode, ratio):
 
 
 def scanImage(path, mode):
-	"""Read Image from path and return transformed Image"""
+	"""Read Image from path and return transformed Image
+		0 - Transform only
+		1 - Transform and grey scale
+		2 - Transform greyscale, and threshold"""
 
 	#Read Image
 	image = cv2.imread(path)
