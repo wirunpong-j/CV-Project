@@ -13,6 +13,8 @@ import cv2
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", required = True,
 	help = "Path to the image to be scanned")
+ap.add_argument("-m", "--mode", required = True,
+	help = "Mode of Scan")
 args = vars(ap.parse_args())
 
 # load the image and compute the ratio of the old height
@@ -86,12 +88,24 @@ warped = four_point_transform(orig, screenCnt.reshape(4, 2) * ratio)
  
 # convert the warped image to grayscale, then threshold it
 # to give it that 'black and white' paper effect
-warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
-warped = threshold_adaptive(warped, 251, offset = 10)
-warped = warped.astype("uint8") * 255
- 
-# show the original and scanned images
+
 print "STEP 3: Apply perspective transform"
+
 cv2.imshow("Original", imutils.resize(orig, height = 650))
-cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+
+if int(args["mode"]) == 0 :
+
+	cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+	
+elif int(args["mode"]) == 1 :
+	warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+	cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+	
+elif int(args["mode"]) == 2 :
+
+	warped = cv2.cvtColor(warped, cv2.COLOR_BGR2GRAY)
+	warped = threshold_adaptive(warped, 251, offset = 10)
+	warped = warped.astype("uint8") * 255
+	cv2.imshow("Scanned", imutils.resize(warped, height = 650))
+
 cv2.waitKey(0)
