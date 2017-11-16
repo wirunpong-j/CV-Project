@@ -98,16 +98,3 @@ def scanImage(path, mode):
 	cv2.imshow("Result", result)
 	cv2.waitKey(0)
 	cv2.destroyAllWindows()
-
-
-def main():
-	ap = argparse.ArgumentParser()
-	ap.add_argument("-i", "--image", required = True,
-		help = "Path to the image to be scanned")
-	ap.add_argument("-m", "--mode", required = True,
-		help = "Mode of Scan")
-	args = vars(ap.parse_args())
-
-	scanImage(args["image"], int(args["mode"]))
-
-main()
