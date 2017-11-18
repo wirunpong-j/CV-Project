@@ -106,4 +106,3 @@ def scanImage(path, mode):
 	# cv2.destroyAllWindows()
 
 	return result
-
